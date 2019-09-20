@@ -5,12 +5,15 @@ using UnityEngine;
 public class SpaceShip : MonoBehaviour
 {
 	Rigidbody rigidBody;
+	AudioSource audioSource;
 
-	[SerializeField ]float speed = 20f;
+	[SerializeField] float mainThruster = 5f;
+	[SerializeField] float rotationThruster = 5f;
 
 	void Start()
     {
 		rigidBody = GetComponent<Rigidbody>();
+		audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -22,16 +25,23 @@ public class SpaceShip : MonoBehaviour
 	{
 		if (Input.GetKey(KeyCode.Space))
 		{
-			Debug.Log("Space pressed");
+			rigidBody.AddRelativeForce(Vector3.up * mainThruster * Time.deltaTime);
+			if (!audioSource.isPlaying)
+			{
+				audioSource.Play();
+			}
+		} else
+		{
+			audioSource.Stop();
 		}
 
 		if (Input.GetKey(KeyCode.A))
 		{
-			Debug.Log("Rotating Left");
+			transform.Rotate(Vector3.forward * rotationThruster * Time.deltaTime);
 		}
 		else if (Input.GetKey(KeyCode.D))
 		{
-			Debug.Log("Rotating Right");
+			transform.Rotate(-Vector3.forward * rotationThruster * Time.deltaTime);
 		}
 	}
 }
