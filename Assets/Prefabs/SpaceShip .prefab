@@ -1250,8 +1250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf1545f5edcd8c479334af3a4754079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedUp: 100
-  speed: 200
+  mainThruster: 100
+  rotationThruster: 200
 --- !u!1 &8592217270217345609
 GameObject:
   m_ObjectHideFlags: 0
