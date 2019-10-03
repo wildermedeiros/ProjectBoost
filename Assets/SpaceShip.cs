@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpaceShip : MonoBehaviour
 {
@@ -30,9 +31,11 @@ public class SpaceShip : MonoBehaviour
 		} else if (collision.gameObject.CompareTag("Finish"))
 		{
 			Debug.Log("Finish");
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 		} else
 		{
 			Debug.Log("Dead");
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 			// kill de player
 		}
 	}
