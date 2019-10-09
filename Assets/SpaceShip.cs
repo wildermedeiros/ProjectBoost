@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class SpaceShip : MonoBehaviour
 {
+	[SerializeField] float mainThrust = 100;
+	[SerializeField] float rcsThrust = 100;
+	[SerializeField] float timeToTranscend = 1f;
+	[SerializeField] float timeToDie = 1f;
+
 	Rigidbody rigidBody;
 	AudioSource audioSource;
 
-	[SerializeField] float mainThrust = 100;
-	[SerializeField] float rcsThrust = 100;
+	enum State { Alive, Dying, Transcending}
+	State state = State.Alive;
 
 	void Start()
     {
@@ -19,25 +24,41 @@ public class SpaceShip : MonoBehaviour
 
     void Update()
 	{
-		Thrust();
-		Rotate();
+		// todo somewhere to stop sound
+		if (state == State.Alive)
+		{
+			Thrust();
+			Rotate();
+		}
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
+		if (state != State.Alive) { return; }
+
 		if (collision.gameObject.CompareTag("Friendly"))
 		{
-			Debug.Log("Friendly");
+
 		} else if (collision.gameObject.CompareTag("Finish"))
 		{
-			Debug.Log("Finish");
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-		} else
-		{
-			Debug.Log("Dead");
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-			// kill de player
+			state = State.Transcending;
+			Invoke("LoadNextScene", timeToTranscend);
 		}
+		else
+		{
+			state = State.Dying;
+			Invoke("ResetScene", timeToDie);
+		}
+	}
+
+	private void ResetScene()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	private void LoadNextScene()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
 
 	private void Thrust()
