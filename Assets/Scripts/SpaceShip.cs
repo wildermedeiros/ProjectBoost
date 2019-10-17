@@ -9,6 +9,7 @@ public class SpaceShip : MonoBehaviour
 	[SerializeField] float rcsThrust = 100;
 	[SerializeField] float timeToLoadLevel = 1f;
 	[SerializeField] float timeToRestartLevel = 1f;
+	[SerializeField] Joystick joystick;
 
 	[SerializeField] AudioClip mainEngine;
 	[SerializeField] AudioClip death;
@@ -18,11 +19,11 @@ public class SpaceShip : MonoBehaviour
 	[SerializeField] ParticleSystem deathParticles;
 	[SerializeField] ParticleSystem successParticles;
 
-
 	Rigidbody rigidBody;
 	AudioSource audioSource;
+	bool colliderIsOn = true;
 
-	enum State { Alive, Dying, Transcending}
+	enum State { Alive, Dying, Transcending, Debug}
 	State state = State.Alive;
 
 	void Start()
@@ -39,10 +40,29 @@ public class SpaceShip : MonoBehaviour
 			RespondToThrustInput();
 			RespondToRotateInput();
 		}
+
+		if (Input.GetKey(KeyCode.L))
+		{
+			LoadNextScene();
+		}
+
+		if (Input.GetKey(KeyCode.C))
+		{
+			RespondToDebugMode();
+		}
+	}
+
+	private void RespondToDebugMode()
+	{
+		if (colliderIsOn)
+			colliderIsOn = false;
+		else
+			colliderIsOn = true;
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
+		if (!colliderIsOn) { return; }
 		if (state != State.Alive) { return; }
 
 		if (collision.gameObject.CompareTag("Friendly"))
@@ -88,7 +108,7 @@ public class SpaceShip : MonoBehaviour
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
 
-	private void RespondToThrustInput()
+	public void RespondToThrustInput()
 	{
 		float thrustThisFrame = mainThrust * Time.deltaTime;
 		if (Input.GetKey(KeyCode.Space))
@@ -102,7 +122,7 @@ public class SpaceShip : MonoBehaviour
 		}
 	}
 
-	private void ApplyThrust(float thrustThisFrame)
+	public void ApplyThrust(float thrustThisFrame)
 	{
 		rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
 		if (!audioSource.isPlaying)
