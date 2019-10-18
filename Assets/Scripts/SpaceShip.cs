@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class SpaceShip : MonoBehaviour
 {
@@ -98,20 +99,30 @@ public class SpaceShip : MonoBehaviour
 		Invoke("ResetScene", timeToRestartLevel);
 	}
 
-	private void ResetScene()
+	public void ResetScene()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
-	private void LoadNextScene()
+	public void LoadNextScene()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+	}
+
+	public void RestartGame()
+	{
+		SceneManager.LoadScene(0);
+	}
+
+	public void ApplicationQuit()
+	{
+		Application.Quit();
 	}
 
 	public void RespondToThrustInput()
 	{
 		float thrustThisFrame = mainThrust * Time.deltaTime;
-		if (Input.GetKey(KeyCode.Space))
+		if (CrossPlatformInputManager.GetButton("Fire1"))
 		{
 			ApplyThrust(thrustThisFrame);
 		}
@@ -137,15 +148,41 @@ public class SpaceShip : MonoBehaviour
 		rigidBody.freezeRotation = true;
 
 		float rotationThisFrame = rcsThrust * Time.deltaTime;
-		if (Input.GetKey(KeyCode.A))
+		if (CrossPlatformInputManager.GetButton("Fire2"))
 		{
 			transform.Rotate(Vector3.forward * rotationThisFrame);
 		}
-		else if (Input.GetKey(KeyCode.D))
+		else if (CrossPlatformInputManager.GetButton("Fire3"))
 		{
 			transform.Rotate(-Vector3.forward * rotationThisFrame);
 		}
 
 		rigidBody.freezeRotation = false; 
+	}
+
+	public void RotateLeftInputMobile()
+	{
+		rigidBody.freezeRotation = true;
+
+		float rotationThisFrame = rcsThrust * Time.deltaTime;
+		if (Input.GetKey(KeyCode.A))
+		{
+			transform.Rotate(Vector3.forward * rotationThisFrame);
+		}
+
+		rigidBody.freezeRotation = false;
+	}
+
+	public void RotateRightInputMobile()
+	{
+		rigidBody.freezeRotation = true;
+
+		float rotationThisFrame = rcsThrust * Time.deltaTime;
+		if (Input.GetKey(KeyCode.D))
+		{
+			transform.Rotate(-Vector3.forward * rotationThisFrame);
+		}
+
+		rigidBody.freezeRotation = false;
 	}
 }

@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8592217269664867560}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -358,7 +358,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8592217269985301401}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -1166,9 +1166,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 200
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1216,7 +1216,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1255,8 +1255,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainThrust: 1500
   rcsThrust: 200
-  timeToTranscend: 1.5
-  timeToDie: 2
+  timeToLoadLevel: 1
+  timeToRestartLevel: 1
+  joystick: {fileID: 0}
   mainEngine: {fileID: 8300000, guid: 12e38ee006d9d1b4c91b6c09c100aeb3, type: 3}
   death: {fileID: 8300000, guid: b62691935e822054ca58f2562baf242d, type: 3}
   success: {fileID: 8300000, guid: 360d899d25dfcaa4ebc758f64b2d2bf9, type: 3}
@@ -1313,7 +1314,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8592217270217345609}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1

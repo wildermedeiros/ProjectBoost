@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: d15ca06be0aee6f4a89a4aad6cd2fe17
+  - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
@@ -41,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level Spooky.unity
     guid: 687a725b48f40c244b439b69a5ef9145
+  - enabled: 1
+    path: Assets/Scenes/End Game.unity
+    guid: 985c45c5aa436e04f96f8f075253567e
   m_configObjects: {}
