@@ -10,7 +10,8 @@ public class SpaceShip : MonoBehaviour
 	[SerializeField] float rcsThrust = 100;
 	[SerializeField] float timeToLoadLevel = 1f;
 	[SerializeField] float timeToRestartLevel = 1f;
-	[SerializeField] Joystick joystick;
+	[SerializeField] bool pcTest = true;
+    [SerializeField] Joystick joystick;
 
 	[SerializeField] AudioClip mainEngine;
 	[SerializeField] AudioClip death;
@@ -23,10 +24,9 @@ public class SpaceShip : MonoBehaviour
 	Rigidbody rigidBody;
 	AudioSource audioSource;
 	bool colliderIsOn = true;
-
-	enum State { Alive, Dying, Transcending, Debug}
-	State state = State.Alive;
-
+	bool isTransitioning = false;
+	
+	
 	void Start()
     {
 		rigidBody = GetComponent<Rigidbody>();
@@ -36,10 +36,15 @@ public class SpaceShip : MonoBehaviour
     void Update()
 	{
 		// todo somewhere to stop sound
-		if (state == State.Alive)
+		if (!isTransitioning)
 		{
+			if (pcTest)
+			{
+                RespondToThrustInputPC();
+                RespondToRotateInputPC();
+			} else 
 			RespondToThrustInput();
-			RespondToRotateInput();
+			RespondToRotateInputMobile();
 		}
 
 		if (Input.GetKey(KeyCode.L))
@@ -64,7 +69,7 @@ public class SpaceShip : MonoBehaviour
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (!colliderIsOn) { return; }
-		if (state != State.Alive) { return; }
+		if (isTransitioning) { return; }
 
 		if (collision.gameObject.CompareTag("Friendly"))
 		{
@@ -81,7 +86,7 @@ public class SpaceShip : MonoBehaviour
 
 	private void StartSuccessSequence()
 	{
-		state = State.Transcending;
+		isTransitioning = true;
 		audioSource.Stop();
 		audioSource.PlayOneShot(success);
 		mainEngineParticles.Stop();
@@ -91,7 +96,7 @@ public class SpaceShip : MonoBehaviour
 
 	private void StartDeathSequence()
 	{
-		state = State.Dying;
+		isTransitioning = true;
 		audioSource.Stop();
 		audioSource.PlayOneShot(death);
 		mainEngineParticles.Stop();
@@ -106,7 +111,13 @@ public class SpaceShip : MonoBehaviour
 
 	public void LoadNextScene()
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+		int nextSceneIndex = currentSceneIndex + 1;
+		if (SceneManager.sceneCountInBuildSettings == nextSceneIndex)
+		{
+			nextSceneIndex = 0; // loop back to start 
+		}
+		SceneManager.LoadScene(nextSceneIndex);
 	}
 
 	public void RestartGame()
@@ -128,12 +139,30 @@ public class SpaceShip : MonoBehaviour
 		}
 		else
 		{
-			audioSource.Stop();
-			mainEngineParticles.Stop();
+			StopApllyingThrust();
 		}
 	}
 
-	public void ApplyThrust(float thrustThisFrame)
+    public void RespondToThrustInputPC()
+    {
+        float thrustThisFrame = mainThrust * Time.deltaTime;
+        if (Input.GetKey(KeyCode.Space))
+        {
+            ApplyThrust(thrustThisFrame);
+        }
+        else
+        {
+            StopApllyingThrust();
+        }
+    }
+
+    private void StopApllyingThrust()
+    {
+        audioSource.Stop();
+        mainEngineParticles.Stop();
+    }
+
+    public void ApplyThrust(float thrustThisFrame)
 	{
 		rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
 		if (!audioSource.isPlaying)
@@ -143,46 +172,35 @@ public class SpaceShip : MonoBehaviour
 		mainEngineParticles.Play();
 	}
 
-	private void RespondToRotateInput()
+	private void RespondToRotateInputMobile()
 	{
-		rigidBody.freezeRotation = true;
-
 		float rotationThisFrame = rcsThrust * Time.deltaTime;
 		if (CrossPlatformInputManager.GetButton("Fire2"))
+        {
+            RotateManually(rcsThrust * Time.deltaTime);
+        }
+        else if (CrossPlatformInputManager.GetButton("Fire3"))
 		{
-			transform.Rotate(Vector3.forward * rotationThisFrame);
+          RotateManually(-rcsThrust * Time.deltaTime);
 		}
-		else if (CrossPlatformInputManager.GetButton("Fire3"))
-		{
-			transform.Rotate(-Vector3.forward * rotationThisFrame);
-		}
-
-		rigidBody.freezeRotation = false; 
 	}
 
-	public void RotateLeftInputMobile()
-	{
-		rigidBody.freezeRotation = true;
+    private void RotateManually(float rotationThisFrame)
+    {
+        rigidBody.freezeRotation = true;
+        transform.Rotate(Vector3.forward * rotationThisFrame);
+        rigidBody.freezeRotation = false;
+    }
 
-		float rotationThisFrame = rcsThrust * Time.deltaTime;
-		if (Input.GetKey(KeyCode.A))
-		{
-			transform.Rotate(Vector3.forward * rotationThisFrame);
-		}
-
-		rigidBody.freezeRotation = false;
-	}
-
-	public void RotateRightInputMobile()
-	{
-		rigidBody.freezeRotation = true;
-
-		float rotationThisFrame = rcsThrust * Time.deltaTime;
-		if (Input.GetKey(KeyCode.D))
-		{
-			transform.Rotate(-Vector3.forward * rotationThisFrame);
-		}
-
-		rigidBody.freezeRotation = false;
-	}
+    private void RespondToRotateInputPC()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            RotateManually(rcsThrust * Time.deltaTime);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            RotateManually(-rcsThrust * Time.deltaTime);
+        }
+    }
 }
