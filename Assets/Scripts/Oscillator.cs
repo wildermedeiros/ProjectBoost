@@ -33,4 +33,14 @@ public class Oscillator : MonoBehaviour
 		Vector3 offSet = movementVector * movementFactor;
 		transform.position = startingPos + offSet;
     }
+
+    public void SetPeriodForPowerUp(float modifier)
+    {
+        period *= modifier;
+    }
+
+    public void RevertPeriodForPowerUp(float modifier)
+    {
+        period /= modifier;
+    }
 }

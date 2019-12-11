@@ -6,12 +6,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class SpaceShip : MonoBehaviour
 {
+    public static SpaceShip instance;
+
 	[SerializeField] float mainThrust = 100;
 	[SerializeField] float rcsThrust = 100;
 	[SerializeField] float timeToLoadLevel = 1f;
 	[SerializeField] float timeToRestartLevel = 1f;
 	[SerializeField] bool pcTest = true;
-    [SerializeField] Joystick joystick;
 
 	[SerializeField] AudioClip mainEngine;
 	[SerializeField] AudioClip death;
@@ -25,9 +26,13 @@ public class SpaceShip : MonoBehaviour
 	AudioSource audioSource;
 	bool colliderIsOn = true;
 	bool isTransitioning = false;
-	
-	
-	void Start()
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    void Start()
     {
 		rigidBody = GetComponent<Rigidbody>();
 		audioSource = GetComponent<AudioSource>();
@@ -35,7 +40,6 @@ public class SpaceShip : MonoBehaviour
 
     void Update()
 	{
-		// todo somewhere to stop sound
 		if (!isTransitioning)
 		{
 			if (pcTest)
