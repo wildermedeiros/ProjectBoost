@@ -1257,7 +1257,7 @@ MonoBehaviour:
   rcsThrust: 200
   timeToLoadLevel: 1
   timeToRestartLevel: 1
-  joystick: {fileID: 0}
+  pcTest: 0
   mainEngine: {fileID: 8300000, guid: 12e38ee006d9d1b4c91b6c09c100aeb3, type: 3}
   death: {fileID: 8300000, guid: b62691935e822054ca58f2562baf242d, type: 3}
   success: {fileID: 8300000, guid: 360d899d25dfcaa4ebc758f64b2d2bf9, type: 3}
