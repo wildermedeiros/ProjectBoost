@@ -66,7 +66,7 @@ public class ClockWise : MonoBehaviour
     {
         foreach (var oscilatorItem in oscilator)
         {
-            oscilatorItem.SetPeriodForPowerUp(5);
+            oscilatorItem.SetPeriodForPowerUp(5); // serialize this field 
         }
         // todo a habilidade irá durar por quanto tempo?
         isPowerUpTriggered = true;

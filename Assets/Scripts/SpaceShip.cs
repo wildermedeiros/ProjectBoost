@@ -47,7 +47,7 @@ public class SpaceShip : MonoBehaviour
                 RespondToThrustInputPC();
                 RespondToRotateInputPC();
 			} else 
-			RespondToThrustInput();
+			RespondToThrustInputMobile();
 			RespondToRotateInputMobile();
 		}
 
@@ -134,7 +134,7 @@ public class SpaceShip : MonoBehaviour
 		Application.Quit();
 	}
 
-	public void RespondToThrustInput()
+	public void RespondToThrustInputMobile() // mobile 
 	{
 		float thrustThisFrame = mainThrust * Time.deltaTime;
 		if (CrossPlatformInputManager.GetButton("Fire1"))
@@ -160,21 +160,21 @@ public class SpaceShip : MonoBehaviour
         }
     }
 
+    public void ApplyThrust(float thrustThisFrame)
+    {
+        rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
+        mainEngineParticles.Play();
+    }
+
     private void StopApllyingThrust()
     {
         audioSource.Stop();
         mainEngineParticles.Stop();
     }
-
-    public void ApplyThrust(float thrustThisFrame)
-	{
-		rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
-		if (!audioSource.isPlaying)
-		{
-			audioSource.PlayOneShot(mainEngine);
-		}
-		mainEngineParticles.Play();
-	}
 
 	private void RespondToRotateInputMobile()
 	{
@@ -189,13 +189,6 @@ public class SpaceShip : MonoBehaviour
 		}
 	}
 
-    private void RotateManually(float rotationThisFrame)
-    {
-        rigidBody.freezeRotation = true;
-        transform.Rotate(Vector3.forward * rotationThisFrame);
-        rigidBody.freezeRotation = false;
-    }
-
     private void RespondToRotateInputPC()
     {
         if (Input.GetKey(KeyCode.A))
@@ -206,5 +199,12 @@ public class SpaceShip : MonoBehaviour
         {
             RotateManually(-rcsThrust * Time.deltaTime);
         }
+    }
+
+    private void RotateManually(float rotationThisFrame)
+    {
+        rigidBody.freezeRotation = true;
+        transform.Rotate(Vector3.forward * rotationThisFrame);
+        rigidBody.freezeRotation = false;
     }
 }
