@@ -15,4 +15,16 @@ public class LevelHandler : MonoBehaviour
         }
         SceneManager.LoadScene(nextSceneIndex);
     }
+
+    public void LoadSavedScene()
+    {
+        PlayerData playerData = SaveAndLoadSystem.LoadData();
+
+        SceneManager.LoadScene(playerData.level);
+    }
+
+    public void ReturnToMainMenu(int mainMenuIndex)
+    {
+        SceneManager.LoadScene(mainMenuIndex);
+    }
 }

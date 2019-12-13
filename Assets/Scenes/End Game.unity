@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.46169513, g: 0.5124164, b: 0.58993304, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 112000000, guid: 36a0378bdcc44474a941d757ace34398,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -309,8 +309,9 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 40728a9ac04b5e9448cf6f4c664133a8, type: 2}
+  m_sharedMaterial: {fileID: -4958151349964377501, guid: 40728a9ac04b5e9448cf6f4c664133a8,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -462,10 +463,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You beat the game!
+  m_text: End game message!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 40728a9ac04b5e9448cf6f4c664133a8, type: 2}
+  m_sharedMaterial: {fileID: -4958151349964377501, guid: 40728a9ac04b5e9448cf6f4c664133a8,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -531,10 +533,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 332268853}
-    characterCount: 18
+    characterCount: 17
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 4
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
     lineCount: 2
     pageCount: 1
@@ -637,7 +639,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-87956
+  m_Name: pb_Mesh-47434
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1045,8 +1047,9 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 40728a9ac04b5e9448cf6f4c664133a8, type: 2}
+  m_sharedMaterial: {fileID: -4958151349964377501, guid: 40728a9ac04b5e9448cf6f4c664133a8,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1249,7 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1278,7 +1281,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-87952
+  m_Name: pb_Mesh-47430
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1590,7 +1593,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-87954
+  m_Name: pb_Mesh-47432
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1779,6 +1782,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpaceShip
       objectReference: {fileID: 0}
+    - target: {fileID: 241533422, guid: 0f79a2d1b0f6b394994893f4c9ab2a68, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8592217270075275978, guid: 0f79a2d1b0f6b394994893f4c9ab2a68,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1787,7 +1794,7 @@ PrefabInstance:
     - target: {fileID: 8592217270075275978, guid: 0f79a2d1b0f6b394994893f4c9ab2a68,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8592217270075275978, guid: 0f79a2d1b0f6b394994893f4c9ab2a68,
         type: 3}
@@ -1834,6 +1841,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 42.57399
       objectReference: {fileID: 0}
+    - target: {fileID: 8592217269664867573, guid: 0f79a2d1b0f6b394994893f4c9ab2a68,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1302728191}
     - target: {fileID: 8592217269985301474, guid: 0f79a2d1b0f6b394994893f4c9ab2a68,
         type: 3}
       propertyPath: m_Mesh
@@ -1844,11 +1856,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 452927256}
-    - target: {fileID: 8592217269664867573, guid: 0f79a2d1b0f6b394994893f4c9ab2a68,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1302728191}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f79a2d1b0f6b394994893f4c9ab2a68, type: 3}
 --- !u!114 &1915929894 stripped
@@ -1858,7 +1865,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1871734418}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cf1545f5edcd8c479334af3a4754079, type: 3}
   m_Name: 

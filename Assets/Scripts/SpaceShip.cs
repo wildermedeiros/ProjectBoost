@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -121,10 +122,22 @@ public class SpaceShip : MonoBehaviour
 		{
 			nextSceneIndex = 0; // loop back to start 
 		}
+        SaveGameLevel(nextSceneIndex);
+
 		SceneManager.LoadScene(nextSceneIndex);
 	}
 
-	public void RestartGame()
+    private void SaveGameLevel(int nextSceneIndex)
+    {
+        Player player = new Player();
+        player.level = nextSceneIndex;
+
+        Debug.Log(player.level = nextSceneIndex);
+
+        SaveAndLoadSystem.SaveData(player);
+    }
+
+    public void RestartGame()
 	{
 		SceneManager.LoadScene(0);
 	}

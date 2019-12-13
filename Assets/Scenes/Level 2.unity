@@ -1715,6 +1715,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'SpaceShip '
       objectReference: {fileID: 0}
+    - target: {fileID: 241533422, guid: 0f79a2d1b0f6b394994893f4c9ab2a68, type: 3}
+      propertyPath: mainThruster
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 241533422, guid: 0f79a2d1b0f6b394994893f4c9ab2a68, type: 3}
+      propertyPath: rotationThruster
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 8592217270075275978, guid: 0f79a2d1b0f6b394994893f4c9ab2a68,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1770,6 +1778,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8592217269664867573, guid: 0f79a2d1b0f6b394994893f4c9ab2a68,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1041060903}
     - target: {fileID: 8592217269985301474, guid: 0f79a2d1b0f6b394994893f4c9ab2a68,
         type: 3}
       propertyPath: m_Mesh
@@ -1780,19 +1793,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1760423948}
-    - target: {fileID: 8592217269664867573, guid: 0f79a2d1b0f6b394994893f4c9ab2a68,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1041060903}
-    - target: {fileID: 241533422, guid: 0f79a2d1b0f6b394994893f4c9ab2a68, type: 3}
-      propertyPath: mainThruster
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 241533422, guid: 0f79a2d1b0f6b394994893f4c9ab2a68, type: 3}
-      propertyPath: rotationThruster
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 241533421, guid: 0f79a2d1b0f6b394994893f4c9ab2a68, type: 3}
       propertyPath: m_Drag
       value: 0.5
